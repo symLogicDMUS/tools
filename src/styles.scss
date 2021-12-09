@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@use 'theme' as p;
+
+$my-primary: mat.define-palette(p.$mat-red, 500);
+$my-accent: mat.define-palette(p.$mat-red, A200, A100, A400);
+
+// The "warn" palette is optional and defaults to red if not specified.
+$my-warn: mat.define-palette(p.$mat-red);
+
+$my-theme: mat.define-dark-theme((
+    color: (
+        primary: $my-primary,
+        accent: $my-accent,
+        warn: $my-warn,
+    )
+));
+
+body {
+    background-color: #111;
+    margin: 0;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #fff;
+}

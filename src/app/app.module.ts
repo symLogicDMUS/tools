@@ -3,16 +3,44 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ClockComponent } from './clock/clock.component';
+import { TimerComponent } from './timer/timer.component';
+import { StopwatchComponent } from './stopwatch/stopwatch.component';
+import { AnalogDisplayComponent } from './analog-display/analog-display.component';
+import { DigitComponent } from './analog-display/digit/digit.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { ResponsiveDrawerComponent } from './responsive-drawer/responsive-drawer.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { NavbarComponent } from './navbar/navbar.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ClockComponent,
+        TimerComponent,
+        StopwatchComponent,
+        AnalogDisplayComponent,
+        DigitComponent,
+        ResponsiveDrawerComponent,
+        NavbarComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatListModule,
+        MatTabsModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
