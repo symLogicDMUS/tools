@@ -13,7 +13,7 @@ import {Times} from "../analog-display/Times";
 })
 export class TimerListComponent {
     timers: Times [] = [
-        new Times(0, 2, 30, 59)
+        new Times(0, 1, 30, 59)
     ]
 
     constructor() { }

@@ -27,7 +27,8 @@ export class TimerComponent implements OnInit {
         this.minutes = this.timeObj.getMinutes();
         this.seconds = this.timeObj.getSeconds();
         this.milliseconds = this.timeObj.getMilliseconds();
-        interval(1).subscribe(count => {
+        const timer = interval(1)
+            .subscribe(count => {
             console.log(count);
             this.milliseconds--;
             if (this.milliseconds === 0) {
@@ -41,6 +42,9 @@ export class TimerComponent implements OnInit {
                     this.minutes--;
                     this.seconds = 59;
                 }
+            }
+            if (this.seconds === 0 && this.minutes === 0 && this.milliseconds === 0) {
+                timer.unsubscribe()
             }
             this.toolService.parse(this.digits, this.minutes, 'col1')
             this.toolService.parse(this.digits, this.seconds, 'col2')
