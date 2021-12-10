@@ -1,44 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import {getAllZeros} from "../analog-display/getAllZeros";
+import {ToolService} from "../tools.service";
 
 @Component({
     selector: 'app-clock',
     template: `
-        <app-analog-display [digits]="digits"></app-analog-display>
+        <div class="container content">
+            <app-analog-display [digits]="digits"></app-analog-display>
+        </div>
     `,
-    styles: [``],
+    styleUrls: ['../app.component.scss'],
 })
 export class ClockComponent implements OnInit {
-    /**
-     * 10th index for unused digit.
-     * (number is index of array in child where index = value except when digit not used)
-     * */
-    digits = {
-        hours: {
-            tens: 10,
-            ones: 10,
-        },
-        minutes: {
-            tens: 10,
-            ones: 10,
-        },
-        seconds: {
-            tens: 10,
-            ones: 10,
-        },
-    };
+    digits: Digits = getAllZeros()
 
-    parse(time, units) {
-        if (time > 9) {
-            this.digits[units].tens = Number(String(time)[0]);
-            this.digits[units].ones = Number(String(time)[1]);
-        } else {
-            this.digits[units].tens = 10;
-            this.digits[units].ones = time;
-        }
-    }
-
-    constructor() {}
+    constructor(private toolService: ToolService) {}
 
     ngOnInit() {
         const tick = Observable.create((observer) => {
@@ -47,9 +24,9 @@ export class ClockComponent implements OnInit {
             }, 1000);
         });
         tick.subscribe((date) => {
-            this.parse(date.getHours(), 'hours');
-            this.parse(date.getMinutes(), 'minutes');
-            this.parse(date.getSeconds(), 'seconds');
+            this.toolService.parse(this.digits, date.getHours(), 'col1');
+            this.toolService.parse(this.digits, date.getMinutes(), 'col2');
+            this.toolService.parse(this.digits, date.getSeconds(), 'col3');
         });
     }
 }

@@ -17,6 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { NavbarComponent } from './navbar/navbar.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import { TimerListComponent } from './timer-list/timer-list.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import {MatTabsModule} from "@angular/material/tabs";
         DigitComponent,
         ResponsiveDrawerComponent,
         NavbarComponent,
+        TimerListComponent,
     ],
     imports: [
         BrowserModule,
