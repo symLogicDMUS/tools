@@ -1,0 +1,44 @@
+Icon buttons for toggle play/pause, reset, edit, and  delete
+edit and delete buttons disabled when timer is running
+
+searches:
+    how do we pause/restart intervals in rsjx?
+    angular material:
+            cards
+            icon buttons
+            input for numbers
+            dialogs/modals
+            stacks
+
+timerComponent:
+    * togglePlayPause:
+        if playing:
+            set pause
+            enable edit
+            enable delete
+        if paused:
+            set play
+            disable edit
+            disable delete
+    * onReset:
+        set hours, minutes, seconds, to their original values
+    * onEdit:
+        send index to parent's onEdit method
+    * onDelete:
+        send index to parent's onDelete method
+
+timerListComponent:
+    onAdd:
+        open edit dialog. listen for save event in toolService.
+        on save event, add new Times object to list.
+    onEdit(index):
+        open edit dialog. listen for save event in toolService.
+        on save event, set the new values of Times object at index.
+    onDelete(index):
+        called by child timer. remove Times object at index.
+        for i in range(len(timers)):
+            timers.setIndex(i);
+
+
+get code from Angular Material
+

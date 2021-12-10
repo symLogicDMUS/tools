@@ -20,7 +20,7 @@ export class AppComponent {
     }
 
     setTool(event) {
-        this.toolService.tooType.emit(event.tab.textLabel)
+        this.toolService.toolType.emit(event.tab.textLabel)
     }
 
 }

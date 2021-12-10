@@ -12,12 +12,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { ResponsiveDrawerComponent } from './responsive-drawer/responsive-drawer.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { NavbarComponent } from './navbar/navbar.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import {MatCardModule} from "@angular/material/card";
 import { TimerListComponent } from './timer-list/timer-list.component';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { ResponsiveDrawerComponent } from './responsive-drawer/responsive-drawer.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { EditTimerDialogComponent } from './edit-timer-dialog/edit-timer-dialog.component';
+import { DialogDataExampleComponent } from './edit-timer-dialog/dialog-example-dialog/dialog-data-example.component';
+import {DialogDataExampleDialog} from "./edit-timer-dialog/dialog-example-dialog/dialog-example-dialog.component";
 
 @NgModule({
     declarations: [
@@ -30,17 +36,23 @@ import { TimerListComponent } from './timer-list/timer-list.component';
         ResponsiveDrawerComponent,
         NavbarComponent,
         TimerListComponent,
+        EditTimerDialogComponent,
+        DialogDataExampleComponent,
+        DialogDataExampleDialog
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        BrowserAnimationsModule,
         MatToolbarModule,
         MatIconModule,
         MatButtonModule,
         MatSidenavModule,
         MatListModule,
         MatTabsModule,
+        MatCardModule,
+        BrowserAnimationsModule,
+        MatButtonToggleModule,
+        MatDialogModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

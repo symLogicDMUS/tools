@@ -1,18 +1,8 @@
-.clock-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
 .clock {
-    margin: auto;
+    width: 100%;
     display: flex;
     justify-content: center;
-    color: #f44336;
     font-family: "IBM Plex Sans", sans-serif;
-    width: 100%;
-    @media screen and (max-width: 500px) {
-        font-size: 2rem;
-    }
 }
 
 .time-slot {

@@ -4,7 +4,7 @@ import {EventEmitter, Injectable} from '@angular/core';
     providedIn: 'root'
 })
 export class ToolService {
-    tooType: EventEmitter<string> = new EventEmitter<string>();
+    toolType: EventEmitter<string> = new EventEmitter<string>();
 
     constructor() { }
 

@@ -110,7 +110,7 @@ export class DigitComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.toolService.tooType.subscribe(toolType => {
+        this.toolService.toolType.subscribe(toolType => {
             switch (toolType) {
                 case "Clock":
                     this.clock = true;

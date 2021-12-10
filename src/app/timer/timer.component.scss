@@ -1,4 +1,18 @@
-.content {
-    width:100vw;
-    height: calc(100vh - 50px);
+.action-button {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+.card-actions {
+    display: flex;
+    justify-content: center;
+}
+.mat-card {
+    width: 340px;
+}
+.display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #000;
+    height: 200px;
 }

@@ -1,54 +1,93 @@
-import {interval, Observable, Subscription} from "rxjs";
+import {interval} from "rxjs";
 import {ToolService} from "../tools.service";
 import {Times} from "../analog-display/Times";
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {getAllZeros} from "../analog-display/getAllZeros";
 
 @Component({
     selector: 'app-timer',
     template: `
-        <div class="container content">
-            <app-analog-display [digits]="digits"></app-analog-display>
-        </div>
+        <mat-card class="mat-card">
+            <mat-card-title></mat-card-title>
+            <mat-card-content class="display">
+                <app-analog-display [digits]="digits"></app-analog-display>
+            </mat-card-content>
+            <div class="card-actions">
+                <button mat-icon-button (click)="togglePlayPause()">
+                    <mat-icon *ngIf="paused">play_arrow</mat-icon>
+                    <mat-icon *ngIf="!paused">pause_icon</mat-icon>
+                </button>
+                <button mat-icon-button (click)="onReset()"><mat-icon>undo</mat-icon></button>
+                <button mat-icon-button (click)="onEdit()"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button (click)="onDelete()"><mat-icon>delete</mat-icon></button>
+            </div>
+        </mat-card>
     `,
-    styleUrls: ['../app.component.scss'],
+    styleUrls: ['timer.component.scss'],
 })
 export class TimerComponent implements OnInit {
     @Input() timeObj: Times;
+    @Output() edit: EventEmitter<number> = new EventEmitter<number>();
+    @Output() delete: EventEmitter<number> = new EventEmitter<number>();
+    hours: number;
     minutes: number;
     seconds: number;
-    milliseconds: number;
+    paused: boolean;
     digits: Digits = getAllZeros();
-    timerSub: Subscription;
 
     constructor(private toolService: ToolService) {}
 
-    ngOnInit(): void {
+    togglePlayPause() {
+        this.paused = ! this.paused;
+    }
+
+    onEdit() {
+        this.edit.emit(this.timeObj.getIndex())
+    }
+
+    onDelete() {
+        this.delete.emit(this.timeObj.getIndex())
+    }
+
+    onReset() {
+        this.hours = this.timeObj.getHours();
         this.minutes = this.timeObj.getMinutes();
         this.seconds = this.timeObj.getSeconds();
-        this.milliseconds = this.timeObj.getMilliseconds();
-        const timer = interval(1)
-            .subscribe(count => {
-            console.log(count);
-            this.milliseconds--;
-            if (this.milliseconds === 0) {
-                if (this.seconds > 0) {
-                    this.seconds--;
-                    this.milliseconds = 59;
+        this.toolService.parse(this.digits, this.hours, 'col1')
+        this.toolService.parse(this.digits, this.minutes, 'col2')
+        this.toolService.parse(this.digits, this.seconds, 'col3')
+    }
+
+    tick() {
+        this.seconds--;
+        if (this.seconds === 0) {
+            if (this.minutes > 0) {
+                this.minutes--;
+                this.seconds = 59;
+            }
+        }
+        if (this.minutes === 0) {
+            if (this.hours > 0) {
+                this.hours--;
+                this.minutes = 59;
+            }
+        }
+    }
+
+    ngOnInit(): void {
+        this.hours = this.timeObj.getHours();
+        this.minutes = this.timeObj.getMinutes();
+        this.seconds = this.timeObj.getSeconds();
+        const timer = interval(1000).subscribe(count => {
+            if (! this.paused) {
+                this.tick();
+                if (this.minutes === 0 && this.hours === 0 && this.seconds === 0) {
+                    timer.unsubscribe()
                 }
+                this.toolService.parse(this.digits, this.hours, 'col1')
+                this.toolService.parse(this.digits, this.minutes, 'col2')
+                this.toolService.parse(this.digits, this.seconds, 'col3')
             }
-            if (this.seconds === 0) {
-                if (this.minutes > 0) {
-                    this.minutes--;
-                    this.seconds = 59;
-                }
-            }
-            if (this.seconds === 0 && this.minutes === 0 && this.milliseconds === 0) {
-                timer.unsubscribe()
-            }
-            this.toolService.parse(this.digits, this.minutes, 'col1')
-            this.toolService.parse(this.digits, this.seconds, 'col2')
-            this.toolService.parse(this.digits, this.milliseconds, 'col3')
         })
     }
 }

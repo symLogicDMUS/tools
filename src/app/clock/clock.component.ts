@@ -6,11 +6,11 @@ import {ToolService} from "../tools.service";
 @Component({
     selector: 'app-clock',
     template: `
-        <div class="container content">
+        <div class="content">
             <app-analog-display [digits]="digits"></app-analog-display>
         </div>
     `,
-    styleUrls: ['../app.component.scss'],
+    styleUrls: ['clock.component.scss'],
 })
 export class ClockComponent implements OnInit {
     digits: Digits = getAllZeros()
