@@ -1,4 +1,4 @@
-import {Observable} from "rxjs";
+import {interval, Observable, Subscription} from "rxjs";
 import {ToolService} from "../tools.service";
 import {Times} from "../analog-display/Times";
 import {Component, Input, OnInit} from '@angular/core';
@@ -15,43 +15,36 @@ import {getAllZeros} from "../analog-display/getAllZeros";
 })
 export class TimerComponent implements OnInit {
     @Input() timeObj: Times;
-
+    minutes: number;
+    seconds: number;
+    milliseconds: number;
     digits: Digits = getAllZeros();
+    timerSub: Subscription;
 
     constructor(private toolService: ToolService) {}
 
     ngOnInit(): void {
-        const timer = Observable.create(observer => {
-            const times = this.timeObj.getTimes()
-            let count = 0;
-            setInterval(() => {
-                times.milliseconds--;
-                if (times.milliseconds === 0) {
-                    times.seconds--;
-                    times.milliseconds = 59;
+        this.minutes = this.timeObj.getMinutes();
+        this.seconds = this.timeObj.getSeconds();
+        this.milliseconds = this.timeObj.getMilliseconds();
+        interval(1).subscribe(count => {
+            console.log(count);
+            this.milliseconds--;
+            if (this.milliseconds === 0) {
+                if (this.seconds > 0) {
+                    this.seconds--;
+                    this.milliseconds = 59;
                 }
-                if (times.seconds === 0) {
-                    times.minutes--;
-                    times.seconds = 59;
-                    if (times.minutes === 0) {
-                        times.milliseconds = 0;
-                        times.seconds = 0;
-                        times.minutes = 0;
-                    }
+            }
+            if (this.seconds === 0) {
+                if (this.minutes > 0) {
+                    this.minutes--;
+                    this.seconds = 59;
                 }
-                this.toolService.parse(this.digits, times.minutes, "col1")
-                this.toolService.parse(this.digits, times.seconds, "col2")
-                this.toolService.parse(this.digits, times.milliseconds, "col3")
-                count++;
-                observer.next(count)
-            }, 1)
-            timer.subscribe(count => {
-                console.log(count);
-                // if (times.milliseconds === 0 && times.seconds === 0 && times.minutes === 0) {
-                //     console.log(times)
-                //     clearInterval(timer)
-                // }
-            })
+            }
+            this.toolService.parse(this.digits, this.minutes, 'col1')
+            this.toolService.parse(this.digits, this.seconds, 'col2')
+            this.toolService.parse(this.digits, this.milliseconds, 'col3')
         })
     }
 }
