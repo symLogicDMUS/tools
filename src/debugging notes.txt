@@ -1,0 +1,2 @@
+confirmed Dialog case hit when open edit dialog
+confirmed Timer case hit again on dialog close

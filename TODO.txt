@@ -1,5 +1,29 @@
-Icon buttons for toggle play/pause, reset, edit, and  delete
 edit and delete buttons disabled when timer is running
+Add FAB to TimerList component to add new Timer
+add media queries for digit sizes under clock tab
+
+flex row of 3 upward buttons
+flex row of 3 digit components
+flex row of 3 downward buttons
+
+* the 3 digit components each take a parsed number value as prop
+
+* the number values for minutes, hours, and seconds are stored in values
+  until they are returned on save button click
+
+* onIncrement and onDecrement functions listen for increment and decrement events.
+(the col string in emitted with the event)
+they need to know which column they are incrementing or decrementing for.
+
+eventually, digits default values should be what the timers current start times are,
+which should be passed with dialog.open(). for now, set them all to zero.
+
+eventually, we want to use the <analog-display> component is the edit-timer-dialog,
+but for now we will recreate it
+
+eventually, we should think about adding 'dialog' as 4th tool type to be emitted ny tool service
+
+
 
 searches:
     how do we pause/restart intervals in rsjx?
@@ -28,17 +52,52 @@ timerComponent:
         send index to parent's onDelete method
 
 timerListComponent:
-    onAdd:
-        open edit dialog. listen for save event in toolService.
-        on save event, add new Times object to list.
-    onEdit(index):
-        open edit dialog. listen for save event in toolService.
-        on save event, set the new values of Times object at index.
-    onDelete(index):
-        called by child timer. remove Times object at index.
+    * onAdd:
+        open edit dialog. listen for return result. return result will be
+        the the values for hours, minutes, and seconds, or null if cancel or backdrop click.
+        append new Times object to array.
+    * onEdit(index):
+        1. * open edit dialog. listen for return result. return result will be
+        2. the new values for hours, minutes, and seconds, or null if cancel or backdrop click.
+           call the setHours, setMinutes, and setSeconds, of the Times object at index
+    * onDelete(index):
+        1. called by child timer. remove Times object at index.
         for i in range(len(timers)):
             timers.setIndex(i);
 
+timerEditDialog:
+    attribute: toolService
+    attribute: minutes
+    attribute: seconds
+    attribute: digits = allZeros()
 
-get code from Angular Material
+    * onIncrease(col):
+        switch (col)
+            case 'hours':
+                hours++
+            case 'minutes':
+                minutes++
+            case 'seconds':
+                seconds++
+            break;
+        toolService.parse(col)
 
+
+    * onDecrease(col):
+        switch (col)
+            case 'hours':
+                hours--
+            case 'minutes':
+                minutes--
+            case 'seconds':
+                seconds--
+            break;
+
+
+increaseButton:
+    * attriubte: col (string)
+    * (click) -> emit increase event
+
+decreaseButton:
+    * attriubte col (string)
+    * (click) -> emit decrease event

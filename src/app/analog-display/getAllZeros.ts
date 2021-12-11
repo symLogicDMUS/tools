@@ -1,4 +1,3 @@
-
 const allZeros: Digits = {
     col1: {
         tens: 0,
@@ -12,9 +11,8 @@ const allZeros: Digits = {
         tens: 0,
         ones: 0,
     },
-
-}
+};
 
 export function getAllZeros() {
-    return JSON.parse(JSON.stringify(allZeros))
+    return JSON.parse(JSON.stringify(allZeros));
 }

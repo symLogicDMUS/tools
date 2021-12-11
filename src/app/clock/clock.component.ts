@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import {getAllZeros} from "../analog-display/getAllZeros";
-import {ToolService} from "../tools.service";
+import { getAllZeros } from '../analog-display/getAllZeros';
+import { ToolService } from '../tools.service';
 
 @Component({
     selector: 'app-clock',
@@ -13,7 +13,7 @@ import {ToolService} from "../tools.service";
     styleUrls: ['clock.component.scss'],
 })
 export class ClockComponent implements OnInit {
-    digits: Digits = getAllZeros()
+    digits: Digits = getAllZeros();
 
     constructor(private toolService: ToolService) {}
 

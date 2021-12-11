@@ -1,8 +1,8 @@
-import {interval} from "rxjs";
-import {ToolService} from "../tools.service";
-import {Times} from "../analog-display/Times";
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {getAllZeros} from "../analog-display/getAllZeros";
+import { interval } from 'rxjs';
+import { ToolService } from '../tools.service';
+import { Times } from '../analog-display/Times';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { getAllZeros } from '../analog-display/getAllZeros';
 
 @Component({
     selector: 'app-timer',
@@ -17,9 +17,19 @@ import {getAllZeros} from "../analog-display/getAllZeros";
                     <mat-icon *ngIf="paused">play_arrow</mat-icon>
                     <mat-icon *ngIf="!paused">pause_icon</mat-icon>
                 </button>
-                <button mat-icon-button (click)="onReset()"><mat-icon>undo</mat-icon></button>
-                <button mat-icon-button (click)="onEdit()"><mat-icon>edit</mat-icon></button>
-                <button mat-icon-button (click)="onDelete()"><mat-icon>delete</mat-icon></button>
+                <button mat-icon-button (click)="onReset()">
+                    <mat-icon>undo</mat-icon>
+                </button>
+                <button mat-icon-button (click)="onEdit()" [disabled]="!paused">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                    mat-icon-button
+                    (click)="onDelete()"
+                    [disabled]="!paused"
+                >
+                    <mat-icon>delete</mat-icon>
+                </button>
             </div>
         </mat-card>
     `,
@@ -38,24 +48,24 @@ export class TimerComponent implements OnInit {
     constructor(private toolService: ToolService) {}
 
     togglePlayPause() {
-        this.paused = ! this.paused;
+        this.paused = !this.paused;
     }
 
     onEdit() {
-        this.edit.emit(this.timeObj.getIndex())
+        this.edit.emit(this.timeObj.getIndex());
     }
 
     onDelete() {
-        this.delete.emit(this.timeObj.getIndex())
+        this.delete.emit(this.timeObj.getIndex());
     }
 
     onReset() {
         this.hours = this.timeObj.getHours();
         this.minutes = this.timeObj.getMinutes();
         this.seconds = this.timeObj.getSeconds();
-        this.toolService.parse(this.digits, this.hours, 'col1')
-        this.toolService.parse(this.digits, this.minutes, 'col2')
-        this.toolService.parse(this.digits, this.seconds, 'col3')
+        this.toolService.parse(this.digits, this.hours, 'col1');
+        this.toolService.parse(this.digits, this.minutes, 'col2');
+        this.toolService.parse(this.digits, this.seconds, 'col3');
     }
 
     tick() {
@@ -74,20 +84,26 @@ export class TimerComponent implements OnInit {
         }
     }
 
+
+
     ngOnInit(): void {
         this.hours = this.timeObj.getHours();
         this.minutes = this.timeObj.getMinutes();
         this.seconds = this.timeObj.getSeconds();
-        const timer = interval(1000).subscribe(count => {
-            if (! this.paused) {
+        const timer = interval(1000).subscribe((count) => {
+            if (!this.paused) {
                 this.tick();
-                if (this.minutes === 0 && this.hours === 0 && this.seconds === 0) {
-                    timer.unsubscribe()
+                if (
+                    this.minutes === 0 &&
+                    this.hours === 0 &&
+                    this.seconds === 0
+                ) {
+                    timer.unsubscribe();
                 }
-                this.toolService.parse(this.digits, this.hours, 'col1')
-                this.toolService.parse(this.digits, this.minutes, 'col2')
-                this.toolService.parse(this.digits, this.seconds, 'col3')
+                this.toolService.parse(this.digits, this.hours, 'col1');
+                this.toolService.parse(this.digits, this.minutes, 'col2');
+                this.toolService.parse(this.digits, this.seconds, 'col3');
             }
-        })
+        });
     }
 }

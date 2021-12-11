@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {ToolService} from "../../tools.service";
+import { ToolService } from '../../tools.service';
 
 @Component({
     selector: 'app-digit',
@@ -105,29 +105,40 @@ export class DigitComponent implements OnInit {
     clock: boolean = true;
     stopwatch: boolean = false;
     timer: boolean = false;
+    dialog: boolean = false;
 
-    constructor(private toolService: ToolService) {
-    }
+    constructor(private toolService: ToolService) {}
 
     ngOnInit() {
-        this.toolService.toolType.subscribe(toolType => {
+        this.toolService.toolType.subscribe((toolType) => {
             switch (toolType) {
-                case "Clock":
+                case 'Clock':
                     this.clock = true;
                     this.stopwatch = false;
                     this.timer = false;
+                    this.dialog = false;
                     break;
-                case "Stopwatch":
+                case 'Stopwatch':
                     this.clock = false;
                     this.stopwatch = true;
                     this.timer = false;
+                    this.dialog = false;
                     break;
-                case "Timer":
+                case 'Timer':
                     this.clock = false;
                     this.stopwatch = false;
                     this.timer = true;
+                    this.dialog = false;
                     break;
+                case 'Dialog':
+                    this.clock = false;
+                    this.stopwatch = false;
+                    this.timer = false;
+                    this.dialog = true;
+                    break;
+                default:
+                    console.log('No tool type selected!')
             }
-        })
+        });
     }
 }

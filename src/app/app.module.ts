@@ -15,15 +15,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { NavbarComponent } from './navbar/navbar.component';
-import {MatTabsModule} from "@angular/material/tabs";
-import {MatCardModule} from "@angular/material/card";
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 import { TimerListComponent } from './timer-list/timer-list.component';
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { ResponsiveDrawerComponent } from './responsive-drawer/responsive-drawer.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import { MatDialogModule } from '@angular/material/dialog';
 import { EditTimerDialogComponent } from './edit-timer-dialog/edit-timer-dialog.component';
-import { DialogDataExampleComponent } from './edit-timer-dialog/dialog-example-dialog/dialog-data-example.component';
-import {DialogDataExampleDialog} from "./edit-timer-dialog/dialog-example-dialog/dialog-example-dialog.component";
+import {DecreaseButtonComponent} from "./edit-timer-dialog/decrease-button/decrease-button.component";
+import { IncreaseButtonComponent } from './edit-timer-dialog/increase-button/increase-button.component';
 
 @NgModule({
     declarations: [
@@ -37,8 +37,8 @@ import {DialogDataExampleDialog} from "./edit-timer-dialog/dialog-example-dialog
         NavbarComponent,
         TimerListComponent,
         EditTimerDialogComponent,
-        DialogDataExampleComponent,
-        DialogDataExampleDialog
+        DecreaseButtonComponent,
+        IncreaseButtonComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {getAllZeros} from "../analog-display/getAllZeros";
+import { getAllZeros } from '../analog-display/getAllZeros';
 
 @Component({
     selector: 'app-stopwatch',
@@ -11,7 +11,6 @@ import {getAllZeros} from "../analog-display/getAllZeros";
     styleUrls: ['../app.component.scss'],
 })
 export class StopwatchComponent implements OnInit {
-
     digits: Digits = getAllZeros();
 
     constructor() {}

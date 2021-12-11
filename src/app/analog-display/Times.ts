@@ -5,8 +5,7 @@ export class Times {
         private minutes: number,
         private seconds: number,
         private milliseconds: number
-    ) {
-    }
+    ) {}
 
     getTimes() {
         return {
@@ -14,7 +13,7 @@ export class Times {
             minutes: this.minutes,
             seconds: this.seconds,
             milliseconds: this.milliseconds,
-        }
+        };
     }
     getIndex() {
         return this.index;
@@ -29,7 +28,7 @@ export class Times {
         return this.seconds;
     }
     getMilliseconds() {
-        return this.milliseconds
+        return this.milliseconds;
     }
 
     setIndex(index: number) {

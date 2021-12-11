@@ -1,12 +1,12 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ToolService {
     toolType: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor() { }
+    constructor() {}
 
     parse(digits: Digits, time: number, col: string) {
         if (time > 9) {
