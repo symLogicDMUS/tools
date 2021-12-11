@@ -80,10 +80,14 @@ export class TimerComponent implements OnInit {
     }
 
     tick() {
-        this.seconds--;
+        if (this.seconds != 0) {
+            this.seconds--;
+        }
         if (this.seconds === 0) {
-            if (this.minutes > 0) {
-                this.minutes--;
+            if (this.minutes > 0 || this.hours > 0) {
+                if (this.minutes > 0) {
+                    this.minutes--;
+                }
                 this.seconds = 59;
             }
         }
