@@ -1,25 +1,46 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {getAllZeros} from "../analog-display/getAllZeros";
-import {ToolService} from "../tools.service";
+import { getAllZeros } from '../analog-display/getAllZeros';
+import { ToolService } from '../tools.service';
 
 @Component({
     selector: 'app-edit-timer-dialog',
     template: `
         <h2 mat-dialog-title>Edit Timer</h2>
         <mat-dialog-content>
-            <div class="row">
-                <app-increase-button [col]="'col1'" (increase)="onIncrease($event)"></app-increase-button>
-                <app-increase-button [col]="'col2'" (increase)="onIncrease($event)"></app-increase-button>
-                <app-increase-button [col]="'col3'" (increase)="onIncrease($event)"></app-increase-button>
+            <div class="col-xs">
+                <app-increase-button
+                    [col]="'col1'"
+                    (increase)="onIncrease($event)"
+                ></app-increase-button>
+                <app-increase-button
+                    [col]="'col2'"
+                    (increase)="onIncrease($event)"
+                ></app-increase-button>
+                <app-increase-button
+                    [col]="'col3'"
+                    (increase)="onIncrease($event)"
+                ></app-increase-button>
             </div>
             <div class="row">
-                <app-analog-display [digits]="digits"></app-analog-display>
+                <app-analog-display
+                    [digits]="digits"
+                    [tool]="'dialog'"
+                ></app-analog-display>
             </div>
-            <div class="row">
-                <app-decrease-button [col]="'col1'" (decrease)="onDecrease($event)"></app-decrease-button>
-                <app-decrease-button [col]="'col2'" (decrease)="onDecrease($event)"></app-decrease-button>
-                <app-decrease-button [col]="'col3'" (decrease)="onDecrease($event)"></app-decrease-button>
+            <div class="col-xs">
+                <app-decrease-button
+                    [col]="'col1'"
+                    (decrease)="onDecrease($event)"
+                ></app-decrease-button>
+                <app-decrease-button
+                    [col]="'col2'"
+                    (decrease)="onDecrease($event)"
+                ></app-decrease-button>
+                <app-decrease-button
+                    [col]="'col3'"
+                    (decrease)="onDecrease($event)"
+                ></app-decrease-button>
             </div>
         </mat-dialog-content>
         <mat-dialog-actions>
@@ -27,7 +48,11 @@ import {ToolService} from "../tools.service";
                 mat-raised-button
                 color="primary"
                 mat-dialog-close
-                [mat-dialog-close]="{hours: hours, minutes: minutes, seconds: seconds}"
+                [mat-dialog-close]="{
+                    hours: hours,
+                    minutes: minutes,
+                    seconds: seconds
+                }"
             >
                 Save
             </button>
@@ -43,7 +68,10 @@ export class EditTimerDialogComponent implements OnInit {
 
     digits: Digits = getAllZeros();
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any, private toolService: ToolService) {}
+    constructor(
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private toolService: ToolService
+    ) {}
 
     ngOnInit(): void {
         this.hours = this.data.hours;
@@ -81,7 +109,6 @@ export class EditTimerDialogComponent implements OnInit {
                 this.toolService.parse(this.digits, this.seconds, col);
                 break;
         }
-
     }
 
     onDecrease(col: string) {
@@ -112,5 +139,4 @@ export class EditTimerDialogComponent implements OnInit {
                 break;
         }
     }
-
 }

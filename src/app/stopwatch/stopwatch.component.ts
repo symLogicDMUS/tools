@@ -5,7 +5,10 @@ import { getAllZeros } from '../analog-display/getAllZeros';
     selector: 'app-stopwatch',
     template: `
         <div class="container content">
-            <app-analog-display [digits]="digits"></app-analog-display>
+            <app-analog-display
+                [digits]="digits"
+                [tool]="'stopwatch'"
+            ></app-analog-display>
         </div>
     `,
     styleUrls: ['../app.component.scss'],

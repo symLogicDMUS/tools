@@ -7,7 +7,10 @@ import { ToolService } from '../tools.service';
     selector: 'app-clock',
     template: `
         <div class="content">
-            <app-analog-display [digits]="digits"></app-analog-display>
+            <app-analog-display
+                [digits]="digits"
+                [tool]="'clock'"
+            ></app-analog-display>
         </div>
     `,
     styleUrls: ['clock.component.scss'],

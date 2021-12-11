@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
-import { ToolService } from './tools.service';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-root',
     template: `
-        <mat-tab-group
-            style="height: 100vh;"
-            (selectedTabChange)="setTool($event)"
-        >
+        <mat-tab-group>
             <mat-tab label="Clock"> <app-clock></app-clock> </mat-tab>
             <mat-tab label="Timer"> <app-timer-list></app-timer-list> </mat-tab>
             <mat-tab label="Stopwatch">
@@ -20,10 +15,5 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent {
     title = 'tools';
-
-    constructor(private toolService: ToolService, private dialog: MatDialog) {}
-
-    setTool(event) {
-        this.toolService.toolType.emit(event.tab.textLabel);
-    }
+    constructor() {}
 }

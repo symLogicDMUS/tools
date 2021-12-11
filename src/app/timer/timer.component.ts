@@ -1,16 +1,27 @@
 import { interval } from 'rxjs';
 import { ToolService } from '../tools.service';
 import { Times } from '../analog-display/Times';
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+} from '@angular/core';
 import { getAllZeros } from '../analog-display/getAllZeros';
 
 @Component({
     selector: 'app-timer',
     template: `
-        <mat-card class="mat-card">
+        <mat-card class="timer">
             <mat-card-title></mat-card-title>
             <mat-card-content class="display">
-                <app-analog-display [digits]="digits"></app-analog-display>
+                <app-analog-display
+                    [digits]="digits"
+                    [tool]="'timer'"
+                ></app-analog-display>
             </mat-card-content>
             <div class="card-actions">
                 <button mat-icon-button (click)="togglePlayPause()">
@@ -42,7 +53,7 @@ export class TimerComponent implements OnInit {
     hours: number;
     minutes: number;
     seconds: number;
-    paused: boolean;
+    paused: boolean = true;
     digits: Digits = getAllZeros();
 
     constructor(private toolService: ToolService) {}
@@ -84,12 +95,8 @@ export class TimerComponent implements OnInit {
         }
     }
 
-
-
     ngOnInit(): void {
-        this.hours = this.timeObj.getHours();
-        this.minutes = this.timeObj.getMinutes();
-        this.seconds = this.timeObj.getSeconds();
+        this.onReset()
         const timer = interval(1000).subscribe((count) => {
             if (!this.paused) {
                 this.tick();
@@ -105,11 +112,11 @@ export class TimerComponent implements OnInit {
                 this.toolService.parse(this.digits, this.seconds, 'col3');
             }
         });
-        this.toolService.timerUpdate.subscribe(index => {
+        this.toolService.timerUpdate.subscribe((index) => {
             if (this.timeObj.getIndex() === index) {
                 this.onReset();
-                this.toolService.timerUpdate.emit(-1)
+                this.toolService.timerUpdate.emit(-1);
             }
-        })
+        });
     }
 }

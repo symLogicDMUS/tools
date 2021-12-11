@@ -22,7 +22,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { ResponsiveDrawerComponent } from './responsive-drawer/responsive-drawer.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditTimerDialogComponent } from './edit-timer-dialog/edit-timer-dialog.component';
-import {DecreaseButtonComponent} from "./edit-timer-dialog/decrease-button/decrease-button.component";
+import { DecreaseButtonComponent } from './edit-timer-dialog/decrease-button/decrease-button.component';
 import { IncreaseButtonComponent } from './edit-timer-dialog/increase-button/increase-button.component';
 
 @NgModule({
