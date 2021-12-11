@@ -46,6 +46,9 @@ export class EditTimerDialogComponent implements OnInit {
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, private toolService: ToolService) {}
 
     ngOnInit(): void {
+        this.hours = this.data.hours;
+        this.minutes = this.data.minutes;
+        this.seconds = this.data.seconds;
         this.toolService.parse(this.digits, this.hours, 'col1');
         this.toolService.parse(this.digits, this.minutes, 'col2');
         this.toolService.parse(this.digits, this.seconds, 'col3');

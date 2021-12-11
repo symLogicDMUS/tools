@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { Times } from '../analog-display/Times';
-import { MatDialog } from '@angular/material/dialog';
-import { EditTimerDialogComponent } from '../edit-timer-dialog/edit-timer-dialog.component';
+import {Component} from '@angular/core';
+import {Times} from '../analog-display/Times';
+import {MatDialog} from '@angular/material/dialog';
+import {EditTimerDialogComponent} from '../edit-timer-dialog/edit-timer-dialog.component';
 import {ToolService} from "../tools.service";
 
 @Component({
@@ -21,13 +21,16 @@ import {ToolService} from "../tools.service";
 export class TimerListComponent {
     timers: Times[] = [new Times(0, 0, 2, 30, 0)];
 
-    constructor(private dialog: MatDialog, private toolService: ToolService) {}
+    constructor(private dialog: MatDialog, private toolService: ToolService) {
+    }
 
     onAdd() {
         this.toolService.toolType.emit("Dialog")
-        let dialogRef = this.dialog.open(EditTimerDialogComponent);
+        let dialogRef = this.dialog.open(
+            EditTimerDialogComponent,
+            {data: {hours: 0, minutes: 0, seconds: 0}}
+        );
         dialogRef.afterClosed().subscribe((result) => {
-            this.toolService.toolType.emit("Timer")
             if (!!result) {
                 this.timers.push(
                     new Times(
@@ -38,20 +41,32 @@ export class TimerListComponent {
                         0
                     )
                 );
+                this.toolService.timerUpdate.emit(this.timers.length - 1)
             }
+            this.toolService.toolType.emit("Timer")
         });
     }
 
     onEdit(index: number) {
         this.toolService.toolType.emit("Dialog")
-        let dialogRef = this.dialog.open(EditTimerDialogComponent);
+        let dialogRef = this.dialog.open(
+            EditTimerDialogComponent,
+            {
+                data: {
+                    hours: this.timers[index].getHours(),
+                    minutes: this.timers[index].getMinutes(),
+                    seconds: this.timers[index].getSeconds(),
+                }
+            }
+        );
         dialogRef.afterClosed().subscribe((result) => {
-            this.toolService.toolType.emit("Timer")
             if (!!result) {
                 this.timers[index].setHours(result.hours);
                 this.timers[index].setMinutes(result.minutes);
                 this.timers[index].setSeconds(result.seconds);
+                this.toolService.timerUpdate.emit(index)
             }
+            this.toolService.toolType.emit("Timer")
         });
     }
 

@@ -18,10 +18,10 @@ they need to know which column they are incrementing or decrementing for.
 eventually, digits default values should be what the timers current start times are,
 which should be passed with dialog.open(). for now, set them all to zero.
 
-eventually, we want to use the <analog-display> component is the edit-timer-dialog,
+* eventually, we want to use the <analog-display> component is the edit-timer-dialog,
 but for now we will recreate it
 
-eventually, we should think about adding 'dialog' as 4th tool type to be emitted ny tool service
+* eventually, we should think about adding 'dialog' as 4th tool type to be emitted ny tool service
 
 
 

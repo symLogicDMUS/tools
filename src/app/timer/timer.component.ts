@@ -1,7 +1,7 @@
 import { interval } from 'rxjs';
 import { ToolService } from '../tools.service';
 import { Times } from '../analog-display/Times';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import { getAllZeros } from '../analog-display/getAllZeros';
 
 @Component({
@@ -105,5 +105,11 @@ export class TimerComponent implements OnInit {
                 this.toolService.parse(this.digits, this.seconds, 'col3');
             }
         });
+        this.toolService.timerUpdate.subscribe(index => {
+            if (this.timeObj.getIndex() === index) {
+                this.onReset();
+                this.toolService.timerUpdate.emit(-1)
+            }
+        })
     }
 }
