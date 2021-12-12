@@ -1,12 +1,3 @@
-Add FAB to TimerList component to add new Timer
-add media queries for digit sizes in clock tab
-style the Timer list
-add stopwatch
+Stop watch will be centered on screen and have large play and pause Icon Buttons
 
-onClick will call onAdd button
-
-
-timer list is flexbox
-flex row for width greater than 600px, flex column for less than 600px
-timers have margin 1rem for greater than 600px, 0.5rem for less than 600px
-for less than 600px, justify content center
+Add colons between values

@@ -7,7 +7,14 @@
 }
 
 .clock {
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 360px) {
+        width: 25px;
+        height: 50px;
+        margin-left: 0.2rem;
+        margin-right: 0.2rem;
+
+    }
+    @media screen and (min-width: 360px) and (max-width: 480px) {
         width: 30px;
         height: 60px;
         margin-left: 0.4rem;
@@ -34,10 +41,36 @@
 }
 
 .stopwatch {
-    width: 20px;
-    height: 40px;
-    margin-left: 0.2rem;
-    margin-right: 0.2rem;
+    @media screen and (max-width: 360px) {
+        width: 25px;
+        height: 50px;
+        margin-left: 0.2rem;
+        margin-right: 0.2rem;
+    }
+    @media screen and (min-width: 360px) and (max-width: 480px) {
+        width: 25px;
+        height: 50px;
+        margin-left: 0.4rem;
+        margin-right: 0.4rem;
+    }
+    @media screen and (min-width: 480px) and (max-width: 600px) {
+        width: 35px;
+        height: 70px;
+        margin-left: 0.6rem;
+        margin-right: 0.6rem;
+    }
+    @media screen and (min-width: 600px) and (max-width: 800px) {
+        width: 40px;
+        height: 80px;
+        margin-left: 0.8rem;
+        margin-right: 0.8rem;
+    }
+    @media screen and (min-width: 800px) {
+        width: 45px;
+        height: 90px;
+        margin-left: 0.9rem;
+        margin-right: 0.9rem;
+    }
 }
 
 .timer {

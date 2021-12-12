@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EditTimerDialogComponent } from './edit-timer-dialog/edit-timer-dialog.component';
 import { DecreaseButtonComponent } from './edit-timer-dialog/decrease-button/decrease-button.component';
 import { IncreaseButtonComponent } from './edit-timer-dialog/increase-button/increase-button.component';
+import { ActionButtonsComponent } from './stopwatch/action-buttons/action-buttons.component';
 
 @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { IncreaseButtonComponent } from './edit-timer-dialog/increase-button/inc
         EditTimerDialogComponent,
         DecreaseButtonComponent,
         IncreaseButtonComponent,
+        ActionButtonsComponent,
     ],
     imports: [
         BrowserModule,
